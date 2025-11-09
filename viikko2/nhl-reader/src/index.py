@@ -12,13 +12,14 @@ def main(nat='FIN'):
 
     for player_dict in response:
         player = Player(player_dict)
-        players.append(player)
+        if player.nationality == nat:
+            players.append(player)
 
     print(f"Players from {nat}")
-
+    print()
+    players = sorted(players, key=lambda player: player.score, reverse = True)
     for player in players:
-        if player.nationality == nat:
-            print(player)
+        print(player)
         
 if __name__ == "__main__":
-    main(nat)
+    main()
