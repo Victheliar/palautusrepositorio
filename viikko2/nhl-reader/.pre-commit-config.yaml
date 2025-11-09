@@ -1,0 +1,9 @@
+repos:
+- repo: local
+  hooks:
+    - id: pylint
+      name: pylint
+      entry: pylint --rcfile=/home/vici/palautusrepositorio/viikko2/nhl-reader/.pylintrc
+      language: system
+      types: [python]
+      require_serial: true

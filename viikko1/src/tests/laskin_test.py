@@ -7,7 +7,7 @@ class StubIO:
         self.inputs = inputs
         self.outputs = []
 
-    def lue(self, teksti):
+    def lue(self):
         return self.inputs.pop(0)
 
     def kirjoita(self, teksti):
@@ -21,7 +21,7 @@ class TestLaskin(unittest.TestCase):
         laskin.suorita()
 
         self.assertEqual(io.outputs[0], "Summa: 4")
-        
+
     def test_kaksi_summaa_oikein(self):
         io1 = StubIO(["1","5","-9999"])
         laskin = Laskin(io1)
