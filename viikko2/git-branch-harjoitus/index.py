@@ -13,3 +13,4 @@ print(f"{x} * {y} = {tulo(x, y)}")
 
 logger("lopetetaan")
 print("goodbye!")
+print("yippee!! :D")
