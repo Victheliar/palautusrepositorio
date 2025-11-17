@@ -31,6 +31,9 @@ Open And Configure Browser
 Login Page Should Be Open
     Title Should Be  Login
 
+Application Page Should Be Open
+    Title Should Be  Welcome to Ohtu Application!
+
 Main Page Should Be Open
     Title Should Be  Ohtu Application main page
 
@@ -43,3 +46,5 @@ Register Page Should Be Open
 Go To Starting Page
     Go To  ${HOME_URL}
 
+Go To Register Page
+    Go To  ${REGISTER_URL}
