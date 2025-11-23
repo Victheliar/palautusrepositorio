@@ -323,3 +323,5 @@ class TestKauppa(unittest.TestCase):
         # varmistetaan, että metodia tilisiirto on kutsuttu
         pankki_mock.tilisiirto.assert_called_with("pekka", ANY, "12345","33333-44455", 2)
         # toistaiseksi ei välitetä kutsuun liittyvistä argumenteista
+
+# tämä on eka muutos :)
