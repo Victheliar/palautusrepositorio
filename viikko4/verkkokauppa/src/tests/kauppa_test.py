@@ -325,3 +325,4 @@ class TestKauppa(unittest.TestCase):
         # toistaiseksi ei välitetä kutsuun liittyvistä argumenteista
 
 # tämä on eka muutos :)
+# tämä on toinen muutos :D
