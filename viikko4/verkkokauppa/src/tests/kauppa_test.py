@@ -326,3 +326,4 @@ class TestKauppa(unittest.TestCase):
 
 # tämä on eka muutos :)
 # tämä on toinen muutos :D
+# tämä on kolmas muutos <3
