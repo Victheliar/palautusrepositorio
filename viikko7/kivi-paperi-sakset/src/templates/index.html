@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Etusivu - Kivi-Paperi-Sakset{% endblock %}
+
+{% block content %}
+<div class="menu-container">
+    <h2>Valitse pelityyppi</h2>
+    <div class="menu-buttons">
+        {% for tyyppi, info in peli_tyypit.items() %}
+        <a href="{{ url_for('aloita_peli', pelityyppi=tyyppi) }}" class="menu-button">
+            {{ info.nimi }}
+        </a>
+        {% endfor %}
+    </div>
+    
+    <div class="info-box">
+        <h3>Peliohjeet</h3>
+        <ul>
+            <li><strong>Kivi (k)</strong> voittaa sakset</li>
+            <li><strong>Paperi (p)</strong> voittaa kiven</li>
+            <li><strong>Sakset (s)</strong> voittaa paperin</li>
+        </ul>
+        <p>Peli jatkuu niin kauan kuin haluat. Voit lopettaa pelin milloin tahansa.</p>
+    </div>
+</div>
+{% endblock %}

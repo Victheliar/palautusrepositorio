@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Pelin tulokset{% endblock %}
+
+{% block content %}
+<div class="results-container">
+    <h2>Peli päättyi!</h2>
+    
+    <div class="final-score">
+        <h3>Lopputulos</h3>
+        <div class="score-board">
+            <div class="score-item">
+                <h3>Pelaaja 1</h3>
+                <p class="score big">{{ ekan_pisteet }}</p>
+            </div>
+            <div class="score-item">
+                <h3>Tasapelit</h3>
+                <p class="score big">{{ tasapelit }}</p>
+            </div>
+            <div class="score-item">
+                <h3>{% if peli_info.tekoaly %}Tietokone{% else %}Pelaaja 2{% endif %}</h3>
+                <p class="score big">{{ tokan_pisteet }}</p>
+            </div>
+        </div>
+        
+        <div class="winner">
+            {% if ekan_pisteet > tokan_pisteet %}
+            <h2>🎉 Pelaaja 1 voitti!</h2>
+            {% elif tokan_pisteet > ekan_pisteet %}
+            <h2>🎉 {% if peli_info.tekoaly %}Tietokone{% else %}Pelaaja 2{% endif %} voitti!</h2>
+            {% else %}
+            <h2>🤝 Tasapeli!</h2>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="action-buttons">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Pelaa uudelleen</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,352 @@
+/* Yleiset tyylit */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 100%;
+    padding: 40px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Info message */
+.info-message {
+    background-color: #e8f4f8;
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.info-message p {
+    margin: 0;
+    color: #333;
+    font-size: 1.1em;
+}
+
+/* Menu-sivu */
+.menu-container {
+    text-align: center;
+}
+
+.menu-container h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.menu-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.info-box {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.info-box h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.info-box ul {
+    list-style-position: inside;
+    margin-bottom: 15px;
+}
+
+.info-box li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Peli-sivu */
+.game-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.score-item {
+    text-align: center;
+}
+
+.score-item h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.score {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.score.big {
+    font-size: 3em;
+    color: #667eea;
+}
+
+/* Pelilomake */
+.game-form {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.selection-display {
+    margin-top: 10px;
+    font-size: 1.2em;
+    min-height: 25px;
+}
+
+.play-button {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.3em;
+    margin-top: 10px;
+}
+
+.play-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.play-button:disabled:hover {
+    transform: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.choice-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 20px 30px;
+    font-size: 1.3em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.choice-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.choice-button:active {
+    transform: translateY(0);
+}
+
+/* Historia */
+.history {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.history h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+thead {
+    background-color: #667eea;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-end {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-home {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Results-sivu */
+.results-container {
+    text-align: center;
+}
+
+.results-container h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.final-score {
+    margin-bottom: 30px;
+}
+
+.final-score h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.winner {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.winner h2 {
+    color: #667eea;
+    font-size: 2em;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #777;
+}
+
+/* Responsiivisuus */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .score-board {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .choice-button {
+        width: 100%;
+    }
+}

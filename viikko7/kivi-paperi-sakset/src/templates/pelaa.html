@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Pelaa - {{ peli_info.nimi }}{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <h2>{{ peli_info.nimi }}</h2>
+    
+    <div class="info-message">
+        <p>Ensimmäinen pelaaja joka saa <strong>5 voittoa</strong> voittaa pelin!</p>
+    </div>
+    
+    <div class="score-board">
+        <div class="score-item">
+            <h3>Pelaaja 1</h3>
+            <p class="score">{{ ekan_pisteet }}</p>
+        </div>
+        <div class="score-item">
+            <h3>Tasapelit</h3>
+            <p class="score">{{ tasapelit }}</p>
+        </div>
+        <div class="score-item">
+            <h3>{% if pelityyppi == 'pvp' %}Pelaaja 2{% else %}Tietokone{% endif %}</h3>
+            <p class="score">{{ tokan_pisteet }}</p>
+        </div>
+    </div>
+    
+    <div class="game-form">
+        <form method="POST" action="{{ url_for('pelaa') }}" id="gameForm">
+            <div class="form-group">
+                <label for="siirto">Pelaaja 1 - Valitse siirtosi:</label>
+                <div class="button-group">
+                    {% if pelityyppi == 'pvp' %}
+                        <button type="button" class="choice-button" onclick="selectMove('siirto', 'k', 1)">🪨 Kivi</button>
+                        <button type="button" class="choice-button" onclick="selectMove('siirto', 'p', 1)">📄 Paperi</button>
+                        <button type="button" class="choice-button" onclick="selectMove('siirto', 's', 1)">✂️ Sakset</button>
+                    {% else %}
+                        <button type="submit" name="siirto" value="k" class="choice-button">🪨 Kivi</button>
+                        <button type="submit" name="siirto" value="p" class="choice-button">📄 Paperi</button>
+                        <button type="submit" name="siirto" value="s" class="choice-button">✂️ Sakset</button>
+                    {% endif %}
+                </div>
+                <input type="hidden" name="siirto" id="siirto" value="">
+                <p id="player1-choice" class="selection-display"></p>
+            </div>
+            
+            {% if pelityyppi == 'pvp' %}
+            <div class="form-group">
+                <label for="siirto2">Pelaaja 2 - Valitse siirtosi:</label>
+                <div class="button-group">
+                    <button type="button" class="choice-button" onclick="selectMove('siirto2', 'k', 2)">🪨 Kivi</button>
+                    <button type="button" class="choice-button" onclick="selectMove('siirto2', 'p', 2)">📄 Paperi</button>
+                    <button type="button" class="choice-button" onclick="selectMove('siirto2', 's', 2)">✂️ Sakset</button>
+                </div>
+                <input type="hidden" name="siirto2" id="siirto2" value="">
+                <p id="player2-choice" class="selection-display"></p>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary play-button" id="playButton" disabled>Pelaa kierros</button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+    
+    {% if pelityyppi == 'pvp' %}
+    <script>
+        let player1Selected = false;
+        let player2Selected = false;
+        
+        function selectMove(inputName, value, player) {
+            document.getElementById(inputName).value = value;
+            
+            const moveNames = {
+                'k': '🪨 Kivi',
+                'p': '📄 Paperi',
+                's': '✂️ Sakset'
+            };
+            
+            if (player === 1) {
+                player1Selected = true;
+                document.getElementById('player1-choice').textContent = 'Valittu: ' + moveNames[value];
+                document.getElementById('player1-choice').style.color = '#667eea';
+                document.getElementById('player1-choice').style.fontWeight = 'bold';
+            } else {
+                player2Selected = true;
+                document.getElementById('player2-choice').textContent = 'Valittu: ' + moveNames[value];
+                document.getElementById('player2-choice').style.color = '#667eea';
+                document.getElementById('player2-choice').style.fontWeight = 'bold';
+            }
+            
+            // Enable submit button only when both players have selected
+            if (player1Selected && player2Selected) {
+                document.getElementById('playButton').disabled = false;
+            }
+        }
+    </script>
+    {% endif %}
+    
+    {% if historia %}
+    <div class="history">
+        <h3>Kierroshistoria</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kierros</th>
+                    <th>Pelaaja 1</th>
+                    <th>{% if pelityyppi == 'pvp' %}Pelaaja 2{% else %}Tietokone{% endif %}</th>
+                    <th>Tulos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for kierros in historia|reverse %}
+                <tr>
+                    <td>{{ historia|length - loop.index0 }}</td>
+                    <td>{{ kierros.pelaaja1_siirto|upper }}</td>
+                    <td>{{ kierros.pelaaja2_siirto|upper }}</td>
+                    <td>
+                        {% if kierros.pelaaja1_siirto == kierros.pelaaja2_siirto %}
+                        Tasapeli
+                        {% elif (kierros.pelaaja1_siirto == 'k' and kierros.pelaaja2_siirto == 's') or 
+                                (kierros.pelaaja1_siirto == 'p' and kierros.pelaaja2_siirto == 'k') or
+                                (kierros.pelaaja1_siirto == 's' and kierros.pelaaja2_siirto == 'p') %}
+                        Pelaaja 1 voittaa
+                        {% else %}
+                        {% if pelityyppi == 'pvp' %}Pelaaja 2{% else %}Tietokone{% endif %} voittaa
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    
+    <div class="action-buttons">
+        <a href="{{ url_for('index') }}" class="btn btn-home">Keskeytä ja aloita uusi peli</a>
+    </div>
+</div>
+{% endblock %}
