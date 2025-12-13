@@ -137,51 +137,51 @@ class TestKiviPaperiSaksetWeb:
         tulos = peli2.pelaa_kierros('s', 'p')
         assert tulos['ekan_pisteet'] == 3
 
-    def test_peli_paattyy_kun_pelaaja1_saa_5_voittoa(self):
-        """Testaa että peli päättyy kun pelaaja 1 saa 5 voittoa"""
+    def test_peli_paattyy_kun_pelaaja1_saa_3_voittoa(self):
+        """Testaa että peli päättyy kun pelaaja 1 saa 3 voittoa"""
         peli = KiviPaperiSaksetWeb()
         
-        # Pelaa 4 voittokierrosta
-        for _ in range(4):
+        # Pelaa 2 voittokierrosta
+        for _ in range(2):
             tulos = peli.pelaa_kierros('k', 's')  # eka voittaa
             assert tulos['peli_paattynyt'] == False
             assert peli.peli_kaynnissa == True
         
-        # Viides voitto - pelin pitäisi päättyä
+        # Kolmas voitto - pelin pitäisi päättyä
         tulos = peli.pelaa_kierros('k', 's')
-        assert tulos['ekan_pisteet'] == 5
+        assert tulos['ekan_pisteet'] == 3
         assert tulos['peli_paattynyt'] == True
         assert peli.peli_kaynnissa == False
 
-    def test_peli_paattyy_kun_pelaaja2_saa_5_voittoa(self):
-        """Testaa että peli päättyy kun pelaaja 2 saa 5 voittoa"""
+    def test_peli_paattyy_kun_pelaaja2_saa_3_voittoa(self):
+        """Testaa että peli päättyy kun pelaaja 2 saa 3 voittoa"""
         peli = KiviPaperiSaksetWeb()
         
-        # Pelaa 4 voittokierrosta
-        for _ in range(4):
+        # Pelaa 2 voittokierrosta
+        for _ in range(2):
             tulos = peli.pelaa_kierros('s', 'k')  # toka voittaa
             assert tulos['peli_paattynyt'] == False
             assert peli.peli_kaynnissa == True
         
-        # Viides voitto - pelin pitäisi päättyä
+        # Kolmas voitto - pelin pitäisi päättyä
         tulos = peli.pelaa_kierros('s', 'k')
-        assert tulos['tokan_pisteet'] == 5
+        assert tulos['tokan_pisteet'] == 3
         assert tulos['peli_paattynyt'] == True
         assert peli.peli_kaynnissa == False
 
-    def test_peli_jatkuu_jos_alle_5_voittoa(self):
-        """Testaa että peli jatkuu kun kummallakin alle 5 voittoa"""
+    def test_peli_jatkuu_jos_alle_3_voittoa(self):
+        """Testaa että peli jatkuu kun kummallakin alle 3 voittoa"""
         peli = KiviPaperiSaksetWeb()
         
-        # Pelaa 4 voittoa kummallekin
-        for _ in range(4):
+        # Pelaa 2 voittoa kummallekin
+        for _ in range(2):
             peli.pelaa_kierros('k', 's')  # eka voittaa
             tulos = peli.pelaa_kierros('s', 'k')  # toka voittaa
             assert tulos['peli_paattynyt'] == False
         
         assert peli.peli_kaynnissa == True
-        assert peli.tuomari.ekan_pisteet == 4
-        assert peli.tuomari.tokan_pisteet == 4
+        assert peli.tuomari.ekan_pisteet == 2
+        assert peli.tuomari.tokan_pisteet == 2
 
     def test_tasapelit_eivat_paata_pelia(self):
         """Testaa että tasapelit eivät päätä peliä"""

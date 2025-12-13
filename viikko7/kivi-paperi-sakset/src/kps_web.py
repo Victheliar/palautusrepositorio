@@ -3,7 +3,7 @@ from tuomari import Tuomari
 class KiviPaperiSaksetWeb:
     """Web-yhteensopiva versio kivi-paperi-sakset pelistä"""
     
-    VOITTOPISTEraja = 5
+    VOITTOPISTEraja = 3
     
     def __init__(self, tekoaly=None):
         self.tuomari = Tuomari()

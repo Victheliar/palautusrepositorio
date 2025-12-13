@@ -103,7 +103,7 @@ class TestFlaskApp:
         # Aloita peli
         client.get('/aloita/pvp')
         
-        # Pelaa useita kierroksia (ei vielä 5 voittoa)
+        # Pelaa useita kierroksia (ei vielä 3 voittoa)
         client.post('/pelaa', data={'siirto': 'k', 'siirto2': 's'})  # eka voittaa
         client.post('/pelaa', data={'siirto': 'p', 'siirto2': 's'})  # toka voittaa
         client.post('/pelaa', data={'siirto': 'k', 'siirto2': 'k'})  # tasapeli
@@ -111,12 +111,12 @@ class TestFlaskApp:
         response = client.get('/pelaa')
         assert response.status_code == 200
 
-    def test_peli_paattyy_automaattisesti_5_voiton_jalkeen(self, client):
+    def test_peli_paattyy_automaattisesti_3_voiton_jalkeen(self, client):
         # Aloita peli
         client.get('/aloita/pvp')
         
-        # Pelaa 5 voittokierrosta pelaaja 1:lle
-        for _ in range(5):
+        # Pelaa 3 voittokierrosta pelaaja 1:lle
+        for _ in range(3):
             response = client.post('/pelaa', data={'siirto': 'k', 'siirto2': 's'}, follow_redirects=False)
         
         # Viimeisen kierroksen jälkeen pitäisi ohjata /lopeta-sivulle
@@ -126,7 +126,7 @@ class TestFlaskApp:
     def test_peli_ohjaa_lopetussivulle_jos_jo_paattynyt(self, client):
         # Aloita ja pelaa loppuun
         client.get('/aloita/pvp')
-        for _ in range(5):
+        for _ in range(3):
             client.post('/pelaa', data={'siirto': 'k', 'siirto2': 's'})
         
         # Yritä päästä takaisin pelisivulle

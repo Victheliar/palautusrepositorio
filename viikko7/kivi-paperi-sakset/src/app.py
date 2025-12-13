@@ -57,7 +57,22 @@ def pelaa():
         pelaaja1_siirto = request.form.get('siirto')
         pelaaja2_siirto = request.form.get('siirto2') if pelityyppi == 'pvp' else None
         
-        # Luo peli ja palauta aikaisempien kierrosten pisteet
+        # Nouda nykyiset kumulatiiviset pisteet viimeisestä onnistuneesta kierroksesta
+        ekan_pisteet = 0
+        tokan_pisteet = 0
+        tasapelit = 0
+        for kierros in reversed(historia):
+            if not kierros.get('virhe'):
+                ekan_pisteet = kierros.get('ekan_pisteet', 0)
+                tokan_pisteet = kierros.get('tokan_pisteet', 0)
+                tasapelit = kierros.get('tasapelit', 0)
+                break
+        
+        # Tarkista onko peli jo päättynyt
+        if ekan_pisteet >= 3 or tokan_pisteet >= 3:
+            return redirect(url_for('lopeta'))
+        
+        # Luo uusi peli
         tekoaly = None
         if peli_info['tekoaly'] == 'easy':
             tekoaly = Tekoaly()
@@ -66,13 +81,10 @@ def pelaa():
         
         peli = KiviPaperiSaksetWeb(tekoaly)
         
-        # Laske aikaisemmat pisteet
-        if historia:
-            for kierros in historia:
-                if not kierros.get('virhe'):
-                    peli.tuomari.ekan_pisteet = kierros.get('ekan_pisteet', 0)
-                    peli.tuomari.tokan_pisteet = kierros.get('tokan_pisteet', 0)
-                    peli.tuomari.tasapelit = kierros.get('tasapelit', 0)
+        # Aseta pisteet ennen uutta kierrosta
+        peli.tuomari.ekan_pisteet = ekan_pisteet
+        peli.tuomari.tokan_pisteet = tokan_pisteet
+        peli.tuomari.tasapelit = tasapelit
         
         # Pelaa kierros
         tulos = peli.pelaa_kierros(pelaaja1_siirto, pelaaja2_siirto)
@@ -94,10 +106,16 @@ def pelaa():
     
     # GET-pyyntö - näytä pelisivu
     
-    # Laske kokonaispisteet
-    ekan_pisteet = sum(k.get('ekan_pisteet', 0) for k in historia if not k.get('virhe'))
-    tokan_pisteet = sum(k.get('tokan_pisteet', 0) for k in historia if not k.get('virhe'))
-    tasapelit = sum(k.get('tasapelit', 0) for k in historia if not k.get('virhe'))
+    # Laske kokonaispisteet viimeisestä onnistuneesta kierroksesta
+    ekan_pisteet = 0
+    tokan_pisteet = 0
+    tasapelit = 0
+    for kierros in reversed(historia):
+        if not kierros.get('virhe'):
+            ekan_pisteet = kierros.get('ekan_pisteet', 0)
+            tokan_pisteet = kierros.get('tokan_pisteet', 0)
+            tasapelit = kierros.get('tasapelit', 0)
+            break
     
     return render_template('pelaa.html', 
                          pelityyppi=pelityyppi,
@@ -114,10 +132,16 @@ def lopeta():
     pelityyppi = session.get('pelityyppi', 'pvp')
     peli_info = PELI_TYYPIT.get(pelityyppi, PELI_TYYPIT['pvp'])
     
-    # Laske kokonaispisteet
-    ekan_pisteet = sum(k.get('ekan_pisteet', 0) for k in historia if not k.get('virhe'))
-    tokan_pisteet = sum(k.get('tokan_pisteet', 0) for k in historia if not k.get('virhe'))
-    tasapelit = sum(k.get('tasapelit', 0) for k in historia if not k.get('virhe'))
+    # Laske kokonaispisteet viimeisestä onnistuneesta kierroksesta
+    ekan_pisteet = 0
+    tokan_pisteet = 0
+    tasapelit = 0
+    for kierros in reversed(historia):
+        if not kierros.get('virhe'):
+            ekan_pisteet = kierros.get('ekan_pisteet', 0)
+            tokan_pisteet = kierros.get('tokan_pisteet', 0)
+            tasapelit = kierros.get('tasapelit', 0)
+            break
     
     return render_template('lopeta.html',
                          historia=historia,
