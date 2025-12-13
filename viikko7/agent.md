@@ -1,0 +1,7 @@
+Agentin tekemä sovellus oli loppujen lopuksi toimiva, mutta siinä ilmeni useita korjattavia ongelmia. Sovelluksen toimivuus tuli varmistaa käynnistämällä ja testaamalla sen toimintaa käsin. Tämä johtuu siitä, että vaikka automatisoidut testit menesivät läpi, sovelluksen toiminnassa oli siitä huolimatta ongelmia. Esimerkkinä tästä generoidun sovelluksen pistelaskentalogiikka, joka aluksi oli minulle täysin käsittämätön. Tällä hetkellä olen melko varma, että sovellus toimii oikein, vaikka siinä saatta vielä ilmetä ongelmia, joita en huomannut.
+
+Matkan varrella jouduin antamaan agentille korjauskomentoja melko paljon. Tämä liittyy yllämainittuun pistelogiikkaan. Jouduin monta kertaa pyytämään agenttia korjaamaan sitä tuloksetta. Lopulta ongelma saatiin korjattua, se vaati vain tarpeeksi tarkan promptin. 
+
+Agentin luomat testit olivat paikoin turhankin kattavia. Esim. agentti on testannut jokaisen pelimoodin käynnistymistä ja toimivuutta statuskoodien avulla, vaikka omasta mielestäni yhdenkin testaaminen riittäisi. Muuten koodi oli ihan ymmärrettävää, docstring-kommentit auttoi koodin ymmärtämisessä hyvin paljon. En huomannut minkäänlaisia muutoksia edellisessä tehtävässä tekemässäni koodissa. 
+
+Tehtävää tekiessä olen oppinut promptaamisesta ja css:n *-luokasta, jonka avulla voi muokata kaikkia lomakkeen elementtejä kerralla.
